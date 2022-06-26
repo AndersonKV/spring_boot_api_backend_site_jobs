@@ -98,7 +98,7 @@ GET /api/v1/matchings/find_by_id_and_id_user_and_id_job </br>
 
 UPDATE /api/v1/matchings/update </br>
 
-DELETE /api/v1/matchings/delete</br> //id, id_user, id_job
+DELETE /api/v1/matchings/delete</br>
 DELETE /api/v1/matchings/delete_by_id </br>
 DELETE /api/v1/matchings/destroyer </br>
 
