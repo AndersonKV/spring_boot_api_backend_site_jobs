@@ -15,7 +15,13 @@ url swagger: http://localhost:3333/swagger-ui/
  
  <h3>Algumas informações importante</h3> </br>
  
- user model ->  {
+ Para criar um usúario é preciso escolher entre o <b>role</b> user ou company</br> 
+ apenas o user pode aplicar a uma vaga, enquanto apenas o </br>
+ company pode postar uma vaga</br></br>
+ 
+ É preciso autenticar para aplicar ou postar uma vaga </br></br>
+ 
+ user model ->  {</br>
 	"name": "anderson",  </br>
 	"email": "andersongmail.com",  </br>
 	"password": "andersongmail.com",  </br>
@@ -23,7 +29,7 @@ url swagger: http://localhost:3333/swagger-ui/
 		"role": "user || company"  </br>
 }  </br>
 
-job model ->  {
+job model ->  {</br>
 		 "title": "lorem ipsum lorem ipsum lorem",  </br>
  			"name_company": "lorem ipsum lorem ipsum lorem",  </br>
   			"tech": ["react", "c++"],  </br>
@@ -41,15 +47,15 @@ job model ->  {
 } </br>
  
  
-auth model -> {
+auth model -> {</br>
 		"email": "andersongmail.com",</br>
 	"password": "andersongmail.com"</br>
  }</br>
 
 
-apply model -> {
- 	"id_user": 1, </br>
-	"id_job": 1, </br>
+apply model -> {</br>
+ 	"id_user": "", </br>
+	"id_job": "", </br>
 	"token": "" </br>
  } </br>
  
