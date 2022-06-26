@@ -1,8 +1,58 @@
 # spring_boot_api_backend_site_jobs_with_solid
 <p>
-Api backend com conceitos solid utilizando o Spring Boot PostegreSQL, JPA, Hibernate Rest API
+Api backend com conceitos solid utilizando o Spring Boot PostegreSQL, JPA, Hibernate Rest API e swagger
+
+url swagger: http://localhost:3333/swagger-ui/
+
+<h1>Importante</h1>
+
+ em main/resources/application.properties
+ 
+ spring.datasource.url=URLdoPostegreSql </br>
+ spring.datasource.username=SeuUserName </br>
+ spring.datasource.password=SuaSenha </br>
+ 
+ 
+ <h3>Algumas informações importante</h3> </br>
+ 
+ user model ->  {
+	"name": "anderson",  </br>
+	"email": "andersongmail.com",  </br>
+	"password": "andersongmail.com",  </br>
+		"confirm_password": "andersongmail.com",  </br>
+		"role": "user || company"  </br>
+}  </br>
+
+job model ->  {
+		 "title": "lorem ipsum lorem ipsum lorem",  </br>
+ 			"name_company": "lorem ipsum lorem ipsum lorem",  </br>
+  			"tech": ["react", "c++"],  </br>
+ 			"responsibilities": "lorem ipsum lorem ipsum lorem",  </br>
+				"requirements": "lorem ipsum lorem ipsum lorem",  </br>
+ 			"types_contract": "clt", </br>
+ 			"size_company": "grande", </br>
+ 			"experience_level": "pleno", </br>
+ 			"expired_days":  "1", </br>
+ 			"salary": "5000", </br>
+ 			"remote": "sim", </br>
+		"benefits": "lorem ipsum lorem ipsum lorem", </br>
+	"token": "", </br>
+	"id_user": "" </br>
+} </br>
+ 
+ 
+auth model -> {
+		"email": "andersongmail.com",</br>
+	"password": "andersongmail.com"</br>
+ }</br>
 
 
+apply model -> {
+ 	"id_user": 1, </br>
+	"id_job": 1, </br>
+	"token": "" </br>
+ } </br>
+ 
 <h2>Explore as APIs</h2>
 
 <h3>UserController</h3>
@@ -48,17 +98,10 @@ DELETE /api/v1/matchings/destroyer </br>
 
 <h3>AuthController</h3>
 
-POST /api/v1/jobs/create </br>
-GET /api/v1/jobs/list_jobs </br>
-GET /api/v1/jobs/find_by_id </br>
-GET /api/v1/jobs/find_by_id_user </br>
-GET /api/v1/jobs/find_by_id_job </br>
-GET /api/v1/jobs/find_by_tech </br>
-GET /api/v1/jobs/find_the_last_three_jobs </br>
+POST /api/v1/authenticate/sign_in </br>
+POST /api/v1/authenticate/sign_in_token </br>
 
-UPDATE /api/v1/jobs/update </br>
 
-DELETE /api/v1/jobs/delete_by_id </br>
-DELETE /api/v1/jobs/destroyer </br>
-
+<h3>Passos para o SETUP</h3>
+Clone o repo e abra com intellij que ele faz o rest, o app vai rodar me http://localhost:3333/
  </p>
