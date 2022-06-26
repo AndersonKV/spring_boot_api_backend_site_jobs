@@ -2,7 +2,7 @@
 <p>
 Api backend com conceitos solid utilizando o Spring Boot PostegreSQL, JPA, Hibernate Rest API e swagger
 
-url swagger: http://localhost:3333/swagger-ui/
+url swagger: http://localhost:3333/swagger-ui/ no swagger você pode ver quais parametros para cada rota
 
 <h1>Importante</h1>
 
