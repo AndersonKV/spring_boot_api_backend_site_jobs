@@ -7,11 +7,11 @@ import lombok.Setter;
 @Setter
 public class Recaptcha {
 
-    private Boolean success;
-    private Number score;
-    private String action;
-    private String challenge_ts;
-    private String hostname;
-    private String[] errorCodes;
+//    private Boolean success;
+//    private Number score;
+//    private String action;
+//    private String challenge_ts;
+//    private String hostname;
+//    private String[] errorCodes;
 
 }

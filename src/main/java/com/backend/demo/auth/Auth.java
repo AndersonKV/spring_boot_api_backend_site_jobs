@@ -1,15 +1,12 @@
 package com.backend.demo.auth;
 
-import com.backend.demo.register.EmailValidator;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
@@ -19,7 +16,7 @@ import java.lang.String;
 @Component
 public class Auth {
 
-     @Value("${app.jwtSecret}")
+    @Value("${app.jwtSecret}")
     private String SECRET_KEY;
 
 

@@ -24,8 +24,7 @@ public class User implements Serializable {
     private Long id;
 
     @NotBlank(message = "Nome obrigatorio")
-    @Column(nullable = false, length = 6)
-    @Size(min = 6, max = 30, message = "nome deve ter entre 6 e 30 caracteres")
+    @Size(min = 6, message = "nome deve ter pelo menos 6 caracteres")
     private String name;
 
     @NotBlank(message = "Email obrigatorio")

@@ -29,8 +29,8 @@ public class JobValidation {
             throw new ApiRequestException("você não tem autorização para postar");
         }
 
-        if (request.getTitle().trim().length() < 1 || request.getTitle().trim().length() > 60) {
-            throw new ApiRequestException("O titulo deve ter entre 16 e 60 caracteres");
+        if (request.getTitle().trim().length() < 1 ) {
+            throw new ApiRequestException("O titulo deve ter pelo menos 1  caracteres");
         }
 
         if (request.getSize_company() != SizeCompany.pequena && request.getSize_company() != SizeCompany.media && request.getSize_company() != SizeCompany.grande) {
@@ -44,7 +44,7 @@ public class JobValidation {
         }
 
         if (request.getTypes_contract() != ContractTypes.clt && request.getTypes_contract() != ContractTypes.pj) {
-            throw new ApiRequestException("Error: não foi especificado se o tipo de contrato é CLT ou PJ");
+            throw new ApiRequestException("não foi especificado se o tipo de contrato é clt ou pj");
         }
 
         if (request.getRemote() != Remote.sim && request.getRemote() != Remote.não) {
@@ -59,8 +59,8 @@ public class JobValidation {
             throw new ApiRequestException("você não tem autorização para atualizar");
         }
 
-        if (request.getTitle().trim().length() < 1 || request.getTitle().trim().length() > 60) {
-            throw new ApiRequestException("O titulo deve ter entre 16 e 60 caracteres");
+        if (request.getTitle().trim().length() < 1 ) {
+            throw new ApiRequestException("O titulo deve ter pelo menos 1  caracteres");
         }
 
         if (request.getSize_company() != SizeCompany.pequena && request.getSize_company() != SizeCompany.media && request.getSize_company() != SizeCompany.grande) {
@@ -74,13 +74,12 @@ public class JobValidation {
         }
 
         if (request.getTypes_contract() != ContractTypes.clt && request.getTypes_contract() != ContractTypes.pj) {
-            throw new ApiRequestException("Error: não foi especificado se o tipo de contrato é CLT ou PJ");
+            throw new ApiRequestException("não foi especificado se o tipo de contrato é clt ou pj");
         }
 
         if (request.getRemote() != Remote.sim && request.getRemote() != Remote.não) {
             throw new ApiRequestException("Problema ao seleciona se a vaga aceita remoto ou não");
         }
-
         request.setId(user.getId());
 
         return request;

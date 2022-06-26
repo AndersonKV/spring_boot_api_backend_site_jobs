@@ -1,7 +1,7 @@
 package com.backend.demo.service.user;
 
 import com.backend.demo.model.User;
-import com.backend.demo.register.PasswordEncoded;
+import com.backend.demo.util.PasswordEncoded;
 import com.backend.demo.repository.UserRepository;
 import com.backend.demo.util.UserValidation;
 import lombok.AllArgsConstructor;

@@ -3,7 +3,6 @@ package com.backend.demo.util;
 import com.backend.demo.enums.UserRole;
 import com.backend.demo.exception.ApiRequestException;
 import com.backend.demo.model.User;
-import com.backend.demo.register.PasswordEncoded;
 import com.backend.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,8 @@ public class UserValidation {
             throw new ApiRequestException("email já foi registrado");
         }
 
-        if (request.getName().trim().length() < 6 || request.getName().trim().length() > 30) {
-            throw new ApiRequestException("O nome deve ter entre 6 e 30 caracteres");
+        if (request.getName().trim().length() < 6) {
+            throw new ApiRequestException("O nome deve ter pelo menos 6 caracteres");
         }
 
         if (request.getPassword().trim().length() <= 8) {
@@ -47,8 +46,8 @@ public class UserValidation {
             throw new ApiRequestException("email já está em uso");
         }
 
-        if (request.getName().trim().length() < 6 || request.getName().trim().length() > 30) {
-            throw new ApiRequestException("O nome deve ter entre 6 e 30 caracteres");
+        if (request.getName().trim().length() < 6) {
+            throw new ApiRequestException("O nome deve ter pelo menos 6 caracteres");
         }
 
         if (request.getPassword().trim().length() <= 8) {

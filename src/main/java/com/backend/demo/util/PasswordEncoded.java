@@ -1,4 +1,4 @@
-package com.backend.demo.register;
+package com.backend.demo.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

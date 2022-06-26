@@ -1,16 +1,11 @@
 package com.backend.demo.service.user;
 
 import com.backend.demo.model.User;
-import com.backend.demo.register.PasswordEncoded;
 import com.backend.demo.repository.UserRepository;
 import com.backend.demo.service.auth.AuthService;
 import com.backend.demo.util.UserValidation;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.security.RolesAllowed;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor

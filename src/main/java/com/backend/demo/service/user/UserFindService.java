@@ -1,12 +1,8 @@
 package com.backend.demo.service.user;
 
 import com.backend.demo.DTO.UserDTO;
-import com.backend.demo.auth.Auth;
 import com.backend.demo.model.User;
-import com.backend.demo.register.EmailValidator;
-import com.backend.demo.register.PasswordEncoded;
 import com.backend.demo.repository.UserRepository;
-import com.backend.demo.token.recaptcha.RecaptchaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

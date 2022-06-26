@@ -34,21 +34,19 @@ public class UserDTO {
     public UserDTO() {
 
     }
-    //sign in
-    public UserDTO(String email, String password) {
+     public UserDTO(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    //find by id
-    public UserDTO(Long id, String name, String email, String avatar) {
+     public UserDTO(Long id, String name, String email, String avatar) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.avatar = avatar;
     }
 
-    //auth token
+
     public UserDTO(Long id, String token, String email) {
         this.id = id;
         this.token = token;

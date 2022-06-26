@@ -3,7 +3,7 @@ package com.backend.demo.service.auth;
 import com.backend.demo.DTO.LoginDTO;
 import com.backend.demo.auth.Auth;
 import com.backend.demo.model.User;
-import com.backend.demo.register.PasswordEncoded;
+import com.backend.demo.util.PasswordEncoded;
 import com.backend.demo.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;

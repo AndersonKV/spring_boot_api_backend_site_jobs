@@ -60,19 +60,19 @@ public class Job {
     private Remote remote;
 
     @NotBlank(message = "nome da empresa obrigatorio")
-    @Size(min = 16, max = 60, message = "o nome da compania deve ter entre 16 e 60 caracteres")
+    @Size(min = 1, message = "o nome da compania deve ter entre 16 e 60 caracteres")
     private String name_company;
 
     @NotBlank(message = "beneficios não pode estár vazio")
-    @Size(min = 1, max = 600)
+    @Size(min = 1)
     private String benefits;
 
     @NotBlank(message = "responsabilidade não pode estár vazio")
-    @Size(min = 1, max = 600)
+    @Size(min = 1)
     private String responsibilities;
 
     @NotBlank(message = "requerimento não pode estár vazio")
-    @Size(min = 1, max = 600)
+    @Size(min = 1)
     private String requirements;
 
     private String created_at;
