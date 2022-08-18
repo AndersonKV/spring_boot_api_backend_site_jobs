@@ -60,9 +60,9 @@ public class User implements Serializable {
 //      List<Job> jobs;
 
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Job> posts;
-
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private List<Job> posts;
+//
 
     @PrePersist
     @PreUpdate

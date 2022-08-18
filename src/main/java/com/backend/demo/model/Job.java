@@ -42,7 +42,7 @@ public class Job {
 //    private Set<User> id_user;
     private Long user_id;
 
-    @NotBlank(message = "o titulo dava vaga é obrigatorio")
+    @NotBlank(message = "o titulo é obrigatorio")
     @Size(min = 1, max = 80, message = "titulo deve ter entre 1 e 80 caracteres")
     private String title;
 
@@ -73,7 +73,7 @@ public class Job {
     @Size(min = 1)
     private String benefits;
 
-    @NotBlank(message = "responsabilidade não pode estár vazio")
+    @NotBlank(message = "responsabilidade não pode está vazio")
     @Size(min = 1)
     private String responsibilities;
 

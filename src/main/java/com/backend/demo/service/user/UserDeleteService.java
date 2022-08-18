@@ -10,13 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 
-/*
- * por algum motivo que desconheço e não encontrei
- * solução o que deveria ser UserDeleteService não
- * retorna nada alem de null quando
- * coloquei um nome aleatorio e passou a funciona
- * vai ficar assim mesmo
- * */
+
 @Service
 @AllArgsConstructor
 public class UserDeleteService {
