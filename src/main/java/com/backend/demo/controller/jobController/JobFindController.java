@@ -1,12 +1,13 @@
 package com.backend.demo.controller.jobController;
 
 import com.backend.demo.DTO.DataJobSuccessDTO;
-import com.backend.demo.DTO.FindTechDTO;
+import com.backend.demo.DTO.UserDTO;
 import com.backend.demo.model.Job;
 import com.backend.demo.service.job.JobFindService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,19 +22,19 @@ public class JobFindController {
 
     @ApiOperation(value = "should get list jobs")
     @GetMapping(path = "list_jobs")
-    public DataJobSuccessDTO ListJobs() {
-        return this.jobFindService.listJobs();
+    public ResponseEntity findAll() {
+        return this.jobFindService.findAll();
     }
 
     @ApiOperation(value = "should find job by id")
     @GetMapping(path = "find_by_id")
-    public Job FindJobById(@RequestParam("id") Long id) {
+    public ResponseEntity<Job> FindJobById(@RequestParam("id") Long id) {
         return this.jobFindService.findById(id);
     }
 
     @ApiOperation(value = "should find by user id")
-    @GetMapping(path = "find_by_user_id")
-    public Job FindByUserId(@RequestParam("id") Long id) {
+    @GetMapping(path = "find_by_id_user")
+    public ResponseEntity FindByUserId(@RequestParam("id") Long id) {
         return this.jobFindService.findByUserId(id);
     }
 
@@ -50,14 +51,14 @@ public class JobFindController {
 //    }
 
     @GetMapping(path = "find_by_tech")
-    public List<Job> FindByTech(@RequestParam(value = "tech") String tech) {
+    public ResponseEntity<List<Job>> FindByTech(@RequestParam(value = "tech") String tech) {
         return this.jobFindService.findByTech(tech);
 
     }
 
     @ApiOperation(value = "get three last jobs")
     @GetMapping(path = "find_the_last_three_jobs")
-    public List<Job> getTheLastThreeJobs() {
+    public ResponseEntity<List<Job>> getTheLastThreeJobs() {
         return this.jobFindService.findTheLastThreeJobs();
     }
 

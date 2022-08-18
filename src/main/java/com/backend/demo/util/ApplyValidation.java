@@ -2,21 +2,14 @@ package com.backend.demo.util;
 
 import com.backend.demo.enums.UserRole;
 import com.backend.demo.exception.ApiRequestException;
-import com.backend.demo.model.Apply;
-import com.backend.demo.model.Job;
+import com.backend.demo.model.Matching;
 import com.backend.demo.model.User;
-import com.backend.demo.repository.ApplyRepository;
+import com.backend.demo.repository.MatchingRepository;
 import com.backend.demo.repository.JobRepository;
 import com.backend.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
-import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -24,25 +17,31 @@ import java.util.Optional;
 public class ApplyValidation {
     final private UserRepository userRepository;
     final private JobRepository jobRepository;
-    final private ApplyRepository applyRepository;
+    final private MatchingRepository matchingRepository;
     final private DateValidation dateValidation;
 
-    public void pass(Apply request) {
+    public void pass(Matching request) {
         Optional<User> user = this.userRepository.findById(request.getId_user());
 
-        if(!user.isPresent()) {
-            throw new ApiRequestException("id não encontrado");
+        if (!user.isPresent()) {
+            throw new ApiRequestException("id " + request.getId_user() + " não foi encontrado");
         }
 
-        if(user.get().getRole() == UserRole.company) {
+        if (user.get().getRole() == UserRole.company) {
             throw new ApiRequestException("você não tem autorização para aplicar");
         }
 
-        Job job = this.jobRepository.findById(request.getId_job()).orElseThrow(() -> new IllegalStateException("vaga não foi encontrada, id:" + request.getId_job()));
+        var job = this.jobRepository.findById(request.getId_job());
 
-        this.dateValidation.pass(job.getCreated_at());
+        if (job.isEmpty()) {
+            throw new ApiRequestException("id " + request.getId_job() + " não foi encontrado");
+        }
 
-        Optional<Apply> verify = this.applyRepository.verifyIfUserApply(
+        // .orElseThrow(() -> new IllegalStateException("vaga não foi encontrada, id:" + request.getId_job()));
+
+        this.dateValidation.pass(job.get().getCreated_at());
+
+        Optional<Matching> verify = this.matchingRepository.verifyIfUserApply(
                 request.getId_user(),
                 request.getId_job());
 

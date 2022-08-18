@@ -1,11 +1,8 @@
-package com.backend.demo.service.apply;
+package com.backend.demo.service.matching;
 
 import com.backend.demo.exception.ApiRequestException;
-import com.backend.demo.model.Apply;
-import com.backend.demo.repository.ApplyRepository;
-import com.backend.demo.repository.JobRepository;
-import com.backend.demo.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import com.backend.demo.model.Matching;
+import com.backend.demo.repository.MatchingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,68 +13,69 @@ import java.util.Optional;
 
 
 @Service
-public class ApplyFindService {
+public class MatchingFindService {
 
     @Autowired
-    private ApplyRepository applyRepository;
+    private MatchingRepository matchingRepository;
 
-    public List<Apply> findAll() {
-        return this.applyRepository.findAll();
+    public ResponseEntity<List<Matching>> findAll() {
+        var find = this.matchingRepository.findAll();
+        return new ResponseEntity<>(find, HttpStatus.ACCEPTED);
     }
 
-    public Optional<Apply> findById(Long id) {
+    public ResponseEntity<Matching> findById(Long id) {
         try {
-            Optional<Apply> apply = this.applyRepository.findById(id);
+            Optional<Matching> apply = this.matchingRepository.findById(id);
 
             if (!apply.isPresent()) {
                 throw new ApiRequestException("id não encontrado");
             }
 
-            return apply;
+            return new ResponseEntity<>(apply.get(), HttpStatus.ACCEPTED);
         } catch (IllegalStateException e) {
             throw new IllegalStateException(e.getMessage());
         }
     }
 
-    public Optional<Apply> findByIdUser(Long id) {
+    public ResponseEntity<Matching> findByIdUser(Long id) {
         try {
-            Optional<Apply> apply = this.applyRepository.findByIdUser(id);
+            Optional<Matching> apply = this.matchingRepository.findByIdUser(id);
 
             if (!apply.isPresent()) {
                 throw new ApiRequestException("id não encontrado");
             }
 
-            return apply;
-        } catch (IllegalStateException e) {
-            throw new IllegalStateException(e.getMessage());
-        }
-
-    }
-
-    public  Optional<Apply>  findByIdJob(Long id) {
-        try {
-            Optional<Apply> apply = this.applyRepository.findByIdJob(id);
-
-            if (!apply.isPresent()) {
-                throw new ApiRequestException("id não encontrado");
-            }
-
-            return apply;
+            return new ResponseEntity<>(apply.get(), HttpStatus.ACCEPTED);
         } catch (IllegalStateException e) {
             throw new IllegalStateException(e.getMessage());
         }
 
     }
 
-    public Optional<Apply> findByIdAndUserIdAndIdJob(Long id, Long id_user, Long id_job) {
+    public ResponseEntity<Matching> findByIdJob(Long id) {
         try {
-            Optional<Apply> apply = this.applyRepository.findByIdAndIdUserAndIdJob(id, id_user, id_job);
+            Optional<Matching> apply = this.matchingRepository.findByIdJob(id);
+
+            if (!apply.isPresent()) {
+                throw new ApiRequestException("id não encontrado");
+            }
+
+            return new ResponseEntity<>(apply.get(), HttpStatus.ACCEPTED);
+        } catch (IllegalStateException e) {
+            throw new IllegalStateException(e.getMessage());
+        }
+
+    }
+
+    public ResponseEntity<Matching> findByIdAndUserIdAndIdJob(Long id, Long id_user, Long id_job) {
+        try {
+            Optional<Matching> apply = this.matchingRepository.findByIdAndIdUserAndIdJob(id, id_user, id_job);
 
             if (!apply.isPresent()) {
                 throw new ApiRequestException("nenhuma informações foi encontrada com os ids: id " + id + ", id_user " + id_user + ", id_job " + id_job);
             }
 
-            return apply;
+            return new ResponseEntity<>(apply.get(), HttpStatus.ACCEPTED);
         } catch (IllegalStateException e) {
             throw new IllegalStateException(e.getMessage());
         }

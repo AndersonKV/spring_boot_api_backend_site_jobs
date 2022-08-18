@@ -13,12 +13,12 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "spring_boot_jobs_apply")
-public class Apply {
+@Table(name = "spring_matching")
+public class Matching {
 
     @Id
-    @SequenceGenerator(name = "apply_sequence", sequenceName = "apply_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "apply_sequence")
+    @SequenceGenerator(name = "matching_sequence", sequenceName = "matching_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "matching_sequence")
     private Long id;
     @NotNull
     private Long id_user;

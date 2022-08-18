@@ -1,11 +1,16 @@
 package com.backend.demo.service.job;
 
 import com.backend.demo.DTO.DataJobSuccessDTO;
+import com.backend.demo.DTO.UserDTO;
+import com.backend.demo.exception.ApiRequestException;
 import com.backend.demo.model.Job;
 import com.backend.demo.repository.JobRepository;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,48 +19,59 @@ public class JobFindService {
     @Autowired
     private JobRepository jobRepository;
 
-
-    public Job findById(Long id) {
+    public ResponseEntity findById(Long id) {
         try {
-            return jobRepository.findById(id).orElseThrow(() -> new IllegalStateException("id não foi encontrado"));
+            var find = jobRepository.findById(id);
+
+            if (find.isEmpty()) {
+                throw new ApiRequestException("id não foi encontrado");
+            }
+            return new ResponseEntity<>(find, HttpStatus.ACCEPTED);
         } catch (IllegalStateException e) {
             throw new IllegalStateException(e);
         }
 
     }
 
-    public Job findByUserId(Long id) {
+    public ResponseEntity findByUserId(Long id) {
         try {
-            return jobRepository.findByUserId(id).orElseThrow(() -> new IllegalStateException("id não foi encontrado"));
+            var find = jobRepository.findByUserId(id);
+
+            if (find.isEmpty()) {
+                throw new ApiRequestException("id não foi encontrado");
+            }
+            return new ResponseEntity<>(find, HttpStatus.ACCEPTED);
         } catch (IllegalStateException e) {
             throw new IllegalStateException(e);
         }
 
     }
 
-    public List<Job> findByTech(String tech) {
-
+    @Transactional
+    public ResponseEntity<List<Job>> findByTech(String tech) {
         try {
-            //return this.jobRepository.searchByTechsLike(tech, type_contract, remote);
-            return this.jobRepository.findByTech(tech);
+            var find = this.jobRepository.findByTech(tech);
+            return new ResponseEntity<>(find, HttpStatus.ACCEPTED);
         } catch (IllegalStateException e) {
             throw new IllegalStateException(e.getMessage());
         }
 
     }
 
-    public DataJobSuccessDTO listJobs() {
+    public ResponseEntity findAll() {
         try {
-            return new DataJobSuccessDTO(jobRepository.findAll(), true, HttpStatus.OK);
+            var find = jobRepository.findAll();
+            return new ResponseEntity<>(find, HttpStatus.ACCEPTED);
         } catch (IllegalStateException e) {
             throw new IllegalStateException(e);
         }
 
     }
 
-    public List<Job> findTheLastThreeJobs() {
+    public ResponseEntity<List<Job>> findTheLastThreeJobs() {
         try {
-            return jobRepository.findByOrderByIdDesc();
+            var find = jobRepository.findByOrderByIdDesc();
+            return new ResponseEntity<>(find, HttpStatus.ACCEPTED);
         } catch (IllegalStateException e) {
             throw new IllegalStateException(e);
         }

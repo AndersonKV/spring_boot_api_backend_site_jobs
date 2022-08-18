@@ -25,7 +25,7 @@ public class JobCreateController {
 
     @ApiOperation(value="should create job")
     @PostMapping(path = "create")
-    public ResponseEntity<Object>  Create(@Valid @RequestBody Job request) {
+    public ResponseEntity  Create(@Valid @RequestBody Job request) {
         return this.jobCreateService.create(request);
     }
 

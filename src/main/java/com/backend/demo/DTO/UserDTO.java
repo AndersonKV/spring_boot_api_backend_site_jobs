@@ -52,4 +52,12 @@ public class UserDTO {
         this.token = token;
         this.email = email;
     }
+
+    public UserDTO(Long id, String name, String email, String avatar, String created_at) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.avatar = avatar;
+        this.created_at = created_at;
+    }
 }

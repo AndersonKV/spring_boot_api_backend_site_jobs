@@ -1,5 +1,6 @@
 package com.backend.demo.auth;
 
+import com.backend.demo.exception.ApiRequestException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -54,9 +55,12 @@ public class Auth {
 
     public Claims decodeJWT(String jwt) {
         //This line will throw an exception if it is not a signed JWS (as expected)
+
         return Jwts.parser()
                 .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
                 .parseClaimsJws(jwt).getBody();
+
+
     }
 
 }

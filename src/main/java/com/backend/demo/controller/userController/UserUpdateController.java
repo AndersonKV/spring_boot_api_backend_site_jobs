@@ -1,7 +1,7 @@
 package com.backend.demo.controller.userController;
 
+import com.backend.demo.DTO.UserUpdateDTO;
 import com.backend.demo.model.User;
-import com.backend.demo.service.user.UserCreateService;
 import com.backend.demo.service.user.UserUpdateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,9 +25,9 @@ public class UserUpdateController {
     private UserUpdateService userUpdateService;
 
     @ApiOperation(value="should update user")
-    @PutMapping(path = "update")
-    public void Update(@Valid @RequestBody User request) {
-        this.userUpdateService.update(request);
+    @PostMapping(path = "update")
+    public ResponseEntity<User> Update(@Valid @RequestBody UserUpdateDTO request) {
+        return this.userUpdateService.update(request);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

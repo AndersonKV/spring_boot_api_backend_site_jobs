@@ -1,31 +1,45 @@
 package com.backend.demo.service.user;
 
+import com.backend.demo.DTO.DeleteUserByIdDTO;
 import com.backend.demo.exception.ApiRequestException;
-import com.backend.demo.model.User;
 import com.backend.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.validation.Valid;
 
+/*
+ * por algum motivo que desconheço e não encontrei
+ * solução o que deveria ser UserDeleteService não
+ * retorna nada alem de null quando
+ * coloquei um nome aleatorio e passou a funciona
+ * vai ficar assim mesmo
+ * */
 @Service
+@AllArgsConstructor
 public class UserDeleteService {
-    @Autowired
-    private UserRepository userRepository;
+    private final String ID_NOT_FOUND = "id não encontrado";
 
-    public void deleteUserById(Long id) {
-        Optional<User> userId = userRepository.findById(id);
+    private final UserRepository userRepository;
 
-        if (userId.isPresent()) {
-            userRepository.deleteById(id);
-        } else {
-           throw new ApiRequestException("id " + id + " não encontrado");
+    public ResponseEntity delete_by_id(  Long id) {
+        try {
+            var find = this.userRepository.findById(id).orElseThrow(() -> new IllegalStateException(ID_NOT_FOUND));
+
+            this.userRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (IllegalStateException e) {
+            throw new ApiRequestException(e.getMessage());
         }
-
     }
 
-    public void destroyer() {
-        userRepository.deleteAll();
+
+    public ResponseEntity deleteAll() {
+        this.userRepository.deleteAll();
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
+
+
 }

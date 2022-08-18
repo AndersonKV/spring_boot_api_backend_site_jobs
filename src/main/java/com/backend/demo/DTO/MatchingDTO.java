@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-public class ApplyDTO {
+public class MatchingDTO {
     private Long id;
 
     private Long id_user;

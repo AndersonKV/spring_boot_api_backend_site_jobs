@@ -26,7 +26,7 @@ public class UserCreateController {
 
     @ApiOperation(value="should create user")
     @PostMapping(path = "create")
-    public ResponseEntity<Object>  Create(@Valid @RequestBody User request) {
+    public ResponseEntity  Create(@Valid @RequestBody User request) {
         return this.userCreateService.create(request);
     }
 

@@ -4,12 +4,17 @@ import com.backend.demo.enums.ContractTypes;
 import com.backend.demo.enums.ExperiencieLevel;
 import com.backend.demo.enums.Remote;
 import com.backend.demo.enums.SizeCompany;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.logging.log4j2.ColorConverter;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.print.DocFlavor;
@@ -19,22 +24,23 @@ import javax.validation.constraints.Size;
 import java.sql.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "spring_boot_jobs_vaga")
+@Table(name = "spring_job")
 public class Job {
     @Id
-    @SequenceGenerator(name = "vacancies_sequence", sequenceName = "vacancies_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vacancies_sequence")
+    @SequenceGenerator(name = "job_sequence", sequenceName = "job_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "job_sequence")
     private Long id;
 
     @NotNull(message = "falta o id do usuario")
-    private Long id_user;
+
+//    @ManyToMany
+//    private Set<User> id_user;
+    private Long user_id;
 
     @NotBlank(message = "o titulo dava vaga é obrigatorio")
     @Size(min = 1, max = 80, message = "titulo deve ter entre 1 e 80 caracteres")
@@ -75,51 +81,38 @@ public class Job {
     @Size(min = 1)
     private String requirements;
 
-    private String created_at;
+    @NotBlank(message = "techs requerida")
+    private String techs;
 
     private String updated_at;
+    private String created_at;
+
     @NotNull
-    @NotBlank(message = "dias a ser expirado, não pode estár vazio")
+    @NotBlank(message = "necessário escolher quando será expirado a postagem")
     @Length(min = 1, max = 2)
     private String expired_days;
 
-    @NotNull
+    @NotBlank(message = "token não provido")
     private String token;
+
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    private User authorPost;
+
 
     public Job() {
 
     }
 
-    @Transient
-    private List<String> tech; // this is the data as convenient for you to use
-
-    @Column(nullable = false)
-    private String techs; // this is the database column format
-
     @PrePersist
     @PreUpdate
     private void preUpdate() {
-        if (tech == null) {
-            techs = "";
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        String glue = "";
-        for (String fn : tech) {
-            sb.append(glue).append(fn);
-            glue = ";";
-        }
-        techs = sb.toString();
-
         DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
         this.created_at = LocalDate.now().format(formatterDate);
         this.updated_at = LocalDate.now().format(formatterDate);
+
     }
 
-    @PostLoad
-    private void fromTechColumn() {
-        tech = Arrays.asList(techs.split(";"));
-    }
 
 }

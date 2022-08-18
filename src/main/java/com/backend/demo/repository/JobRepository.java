@@ -12,14 +12,14 @@ import java.util.Optional;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long> {
-    @Query("SELECT job FROM Job job WHERE job.id_user = ?1")
+    @Query("SELECT job FROM Job job WHERE job.user_id = ?1")
     Optional<Job> findByUserId(Long id);
 
-    @Query(value = "SELECT * FROM spring_boot_jobs_vaga ORDER BY id DESC limit 3", nativeQuery = true)
+    @Query(value = "SELECT * FROM spring_job ORDER BY id DESC limit 3", nativeQuery = true)
     List<Job> findByOrderByIdDesc();
 
-    @Query(value = "SELECT * FROM spring_boot_jobs_vaga WHERE techs LIKE %:tech%", nativeQuery = true)
-    List<Job> findByTech(String tech);
+    @Query(value = "SELECT * FROM spring_job WHERE techs LIKE %:tech%", nativeQuery = true)
+     List<Job> findByTech(String tech);
 
 //    @Query(value = "SELECT * spring_boot_jobs_vaga where"+
 //            "CASE" +

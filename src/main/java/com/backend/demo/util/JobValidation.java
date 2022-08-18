@@ -19,10 +19,10 @@ public class JobValidation {
     private UserRepository userRepository;
 
     public void pass(Job request) {
-        Optional<User> user = this.userRepository.findById(request.getId_user());
+        Optional<User> user = this.userRepository.findById(request.getUser_id());
 
         if (!user.isPresent()) {
-            throw new ApiRequestException("id " + request.getId_user() + " do usúario não encontrado");
+            throw new ApiRequestException("id " + request.getUser_id() + " do usúario não encontrado");
         }
 
         if (user.get().getRole() != UserRole.company) {

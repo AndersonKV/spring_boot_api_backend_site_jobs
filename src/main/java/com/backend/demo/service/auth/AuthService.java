@@ -2,12 +2,19 @@ package com.backend.demo.service.auth;
 
 import com.backend.demo.DTO.LoginDTO;
 import com.backend.demo.auth.Auth;
+import com.backend.demo.exception.ApiRequestException;
+import com.backend.demo.model.Job;
 import com.backend.demo.model.User;
 import com.backend.demo.util.PasswordEncoded;
 import com.backend.demo.repository.UserRepository;
+import com.backend.demo.util.UserValidation;
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -16,41 +23,39 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoded passwordEncoded;
     private final Auth auth;
+    private final String EMAIL_NOT_FOUND = "esse email não foi registrado";
+    private final UserValidation userValidation;
 
-    public LoginDTO signIn(LoginDTO request) {
-        User getUser = this.userRepository.findByEmail(request.getEmail()).orElseThrow(
-                () -> new IllegalStateException("esse email não foi registrado")
-        );
+    public ResponseEntity<LoginDTO> signIn(LoginDTO request) {
+        var logged = this.userValidation.singIn(request);
 
-        boolean encodedPassword = passwordEncoded.bCryptPasswordEncoder().matches(request.getPassword(), getUser.getPassword());
+        var token = auth.createJWT(
+                logged.getId().toString(),
+                logged.getName(),
+                logged.getPassword(),
+                600000);
 
-        if (!encodedPassword) {
-            throw new IllegalStateException("Senha errada");
-        }
+        LoginDTO loginDTO = new LoginDTO(
+                logged.getId(),
+                logged.getName(),
+                logged.getEmail(),
+                logged.getPassword(),
+                token);
 
-        LoginDTO loginDTO = new LoginDTO();
-
-        loginDTO.setId(getUser.getId());
-        loginDTO.setEmail(getUser.getEmail());
-        loginDTO.setName(getUser.getName());
-
-        loginDTO.setToken(auth.createJWT(
-                getUser.getId().toString(),
-                getUser.getName(),
-                getUser.getPassword(),
-                600000));
-
-        return loginDTO;
+        return new ResponseEntity<>(loginDTO, HttpStatus.ACCEPTED);
     }
 
-    public User signInWithToken(String token) {
+    public ResponseEntity signInWithToken(String token) {
         try {
             Claims verifyToken = auth.decodeJWT(token);
-            long id = Long.valueOf(verifyToken.getId());
-            return userRepository.findById(id).orElseThrow(() -> new IllegalStateException("falha ao autenticar com token, id " + id + " não encontrado"));
-        } catch (IllegalStateException e) {
-            throw new IllegalStateException(e.getMessage());
-        }
 
+            long id = Long.valueOf(verifyToken.getId());
+
+            var find = userRepository.findById(id).orElseThrow(() -> new IllegalStateException("id do usuário não encontrado"));
+
+            return new ResponseEntity<>(find, HttpStatus.ACCEPTED);
+        } catch (IllegalStateException e) {
+            throw new ApiRequestException(e.getMessage());
+        }
     }
 }

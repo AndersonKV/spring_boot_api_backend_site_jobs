@@ -4,6 +4,8 @@ import com.backend.demo.exception.ApiRequestException;
 import com.backend.demo.model.Job;
 import com.backend.demo.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,7 +16,7 @@ public class JobDeleteService {
     private JobRepository jobRepository;
 
 
-    public void delete_by_id(Long id) {
+    public ResponseEntity delete_by_id(Long id) {
         Optional<Job> userId = this.jobRepository.findById(id);
 
         if (!userId.isPresent()) {
@@ -22,9 +24,11 @@ public class JobDeleteService {
         }
 
         this.jobRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    public void destroyer() {
+    public ResponseEntity  destroyer() {
         this.jobRepository.deleteAll();
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

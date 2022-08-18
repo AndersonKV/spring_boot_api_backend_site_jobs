@@ -3,33 +3,46 @@ package com.backend.demo.service.user;
 import com.backend.demo.DTO.UserDTO;
 import com.backend.demo.model.User;
 import com.backend.demo.repository.UserRepository;
+import com.backend.demo.util.UserValidation;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class UserFindService {
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public UserDTO getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(
-                () -> new IllegalStateException("id " + id + " não encontrado")
-        );
+    @Autowired
+    private UserValidation userValidation;
 
-        UserDTO userDTO = new UserDTO();
+    public ResponseEntity<UserDTO> getUserById(Long id) {
+        try {
+            User user = this.userValidation.findById(id);
 
-        userDTO.setName(user.getName());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setId(user.getId());
-        userDTO.setCreated_at(user.getCreated_at());
-        userDTO.setAvatar(user.getAvatar());
-        return userDTO;
+
+            UserDTO userDTO = new UserDTO(
+                    user.getId(),
+                    user.getName(),
+                    user.getEmail(),
+                    user.getAvatar(),
+                    user.getCreated_at()
+            );
+
+            return new ResponseEntity(userDTO, HttpStatus.ACCEPTED);
+        } catch (IllegalStateException e) {
+            throw new IllegalStateException(e.getMessage());
+        }
     }
 
-    public List<User> listUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<List<User>> list_users() {
+        List<User> list = this.userRepository.findAll();
+        //return ResponseEntity.ok(list);
+        return new ResponseEntity(list, HttpStatus.ACCEPTED);
     }
 
 }

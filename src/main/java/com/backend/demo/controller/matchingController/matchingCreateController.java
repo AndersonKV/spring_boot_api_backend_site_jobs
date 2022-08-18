@@ -1,7 +1,7 @@
-package com.backend.demo.controller.applyController;
+package com.backend.demo.controller.matchingController;
 
-import com.backend.demo.model.Apply;
-import com.backend.demo.service.apply.ApplyCreateService;
+import com.backend.demo.model.Matching;
+import com.backend.demo.service.matching.MatchingCreateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +19,16 @@ import java.util.Map;
 @RequestMapping(path = "api/v1/matchings")
 @CrossOrigin("*")
 @Api(value="API REST CREATE APPLICATION")
-public class applyCreateController {
+public class matchingCreateController {
     @Autowired
-    private ApplyCreateService applyCreateService;
+    private MatchingCreateService matchingCreateService;
 
     @ApiOperation(value="should create applications")
     @PostMapping(path = "create")
-    public ResponseEntity<Object> Create(@Valid @RequestBody Apply request) {
-        return this.applyCreateService.create(request);
+    public ResponseEntity<Object> Create(@Valid @RequestBody Matching request) {
+        return this.matchingCreateService.create(request);
     }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
