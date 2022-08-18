@@ -1,6 +1,6 @@
 # spring_boot_api_backend_site_jobs_with_solid
 <p>
-Api backend com conceitos solid utilizando o Spring Boot PostegreSQL, JPA, Hibernate Rest API e swagger
+Api backend com conceitos solid utilizando o Spring Boot PostegreSQL, JPA, Hibernate Rest API e swagger, testes de integration e e2e
 
 url swagger: http://localhost:3333/swagger-ui/ no swagger você pode ver quais parametros para cada rota
 
