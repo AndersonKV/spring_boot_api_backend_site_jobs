@@ -25,17 +25,17 @@ url swagger: http://localhost:3333/swagger-ui/ no swagger você pode ver quais p
 
 <b>FUNCIONAMENTO</B>
 
-<b>Camada de Users</b>
-permite criar usuários com dois tipos de privilegio, user e company
-perfil user pode aplicar a vaga, necessario estar autenticado, e não é permitido criar uma
-perfil company pode postar a vaga, necessario estar autenticado, e não é permitido aplicar a qualquer vaga
-permite atualizar dados, com verificação se email já existe ou se os dados estão devidamente tratados
-pode buscar por id, deleta
+<b>Camada de Users</b></br>
+permite criar usuários com dois tipos de privilegio, user e company</br>
+perfil user pode aplicar a vaga, necessario estar autenticado, e não é permitido criar uma</br>
+perfil company pode postar a vaga, necessario estar autenticado, e não é permitido aplicar a qualquer vaga</br>
+permite atualizar dados, com verificação se email já existe ou se os dados estão devidamente tratados</br>
+pode buscar por id, deleta</br>
 
-<b>Camada de Posts</b>
-criação de post
-busca por id, id_job, filtro de busca de linguagem
-se a vaga já estiver vencida lança um error na hora de aplicar
+<b>Camada de Posts</b></br>
+criação de post</br>
+busca por id, id_job, filtro de busca de linguagem</br>
+se a vaga já estiver vencida lança um error na hora de aplicar</br>
 
  
  user model ->  {</br>
