@@ -1,6 +1,6 @@
 # spring_boot_api_backend_site_jobs_with_solid
 <p>
-Api backend com conceitos solid utilizando o Spring Boot PostegreSQL, JPA, Hibernate Rest API e swagger.</br>
+Api backend com conceitos solid utilizando o Spring Boot PostegreSQL, JPA, valid, autenticação JWT, Hibernate  e swagger.</br>
 
 Testes de integration e e2e</br>
 
@@ -19,11 +19,24 @@ url swagger: http://localhost:3333/swagger-ui/ no swagger você pode ver quais p
  
  <h3>Algumas informações importante</h3> </br>
  
- Para criar um usúario é preciso escolher entre o <b>role</b> user ou company</br> 
- apenas o user pode aplicar a uma vaga, enquanto apenas o </br>
- company pode postar uma vaga</br></br>
- 
- É preciso autenticar para aplicar ou postar uma vaga </br></br>
+ Api do projeto feito no react native, é uma api que gerencia criação de usuarios, vagas de emprego e matching do usuário com a vaga</br>
+ https://github.com/AndersonKV/react_native_app_jobs
+  
+
+<b>FUNCIONAMENTO</B>
+
+<b>Camada de Users</b>
+permite criar usuários com dois tipos de privilegio, user e company
+perfil user pode aplicar a vaga, necessario estar autenticado, e não é permitido criar uma
+perfil company pode postar a vaga, necessario estar autenticado, e não é permitido aplicar a qualquer vaga
+permite atualizar dados, com verificação se email já existe ou se os dados estão devidamente tratados
+pode buscar por id, deleta
+
+<b>Camada de Posts</b>
+criação de post
+busca por id, id_job, filtro de busca de linguagem
+se a vaga já estiver vencida lança um error na hora de aplicar
+
  
  user model ->  {</br>
 	"name": "anderson",  </br>
