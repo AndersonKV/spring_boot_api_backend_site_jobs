@@ -126,5 +126,5 @@ POST /api/v1/authenticate/sign_in_token </br>
 
 
 <h3>Passos para o SETUP</h3>
-Clone o repo e abra com intellij que ele faz o rest, o app vai rodar me http://localhost:3333/
+Clone o repo e abra com intellij que ele faz o resto, o app vai rodar em http://localhost:3333/
  </p>
